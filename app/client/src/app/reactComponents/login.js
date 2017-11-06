@@ -1,6 +1,6 @@
 import React from "react";
 import SearchRepositoryComponent from "./searchRepository";
-import styles from "../css/login.css";
+import styles from "../../css/login.css";
 import  { Redirect } from 'react-router-dom'
 import { BrowserRouter } from 'react-router-dom'
 import * as ReactDOM from "react-dom";

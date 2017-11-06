@@ -1,5 +1,6 @@
 import React from "react";
-import styles from "../css/chat.css";
+import IssuesListComponent from "./issuesList";
+import styles from "../../css/chat.css";
 
 class ChatComponent extends React.Component{
     render() {
@@ -23,6 +24,7 @@ class ChatComponent extends React.Component{
                     <label>Brunches</label>
                     <span id='repo-brunches'></span>
                 </div>
+                <IssuesListComponent />
             </div>
         );
     }

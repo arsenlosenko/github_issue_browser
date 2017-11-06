@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../css/searchRepository.css";
+import styles from "../../css/searchRepository.css";
 import ChatComponent from "./chat";
 let repoUrl;
 
