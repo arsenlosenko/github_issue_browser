@@ -1,41 +1,8 @@
-let username = 'AndriiDronDiachuk';
-let password = 'andrii1333';
-let encodedAuth = btoa(username + ':' + password);
+/*
 
-fetch('https://api.github.com/user', {
-    method: 'get',
-    headers: {
-        'Authorization': 'Basic ' + encodedAuth
-    }
-})
-    .then((res) => {
-        return res.json();
-    })
-    .then((result) => {
-        console.log('login info', result);
-
-        /*fetch('https://api.github.com/authorizations', {
-            method: 'post',
-            headers: {
-                'Authorization': 'Basic ' + encodedAuth
-            },
-            body: {
-                "scopes": [
-                    "public_repo"
-                ],
-                "note": "admin  bla bla"
-            }
-
-        })
-            .then((res) => {
-                return res;
-            })
-            .then((result) => {
-                console.log(result);
-            })*/
-    })
 let repoUrl = 'ksytnyk/service_station';
 repoUrl = 'facebook/react';
+*/
 
 //branches
 fetch('https://api.github.com/repos/' + repoUrl + '/branches', {
