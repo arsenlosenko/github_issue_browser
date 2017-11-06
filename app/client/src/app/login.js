@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./css/login.css";
-import Redirect from "react-router-dom/es/Redirect";
+import  { Redirect } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
+import * as ReactDOM from "react-dom";
 
 class LoginComponent extends React.Component{
     constructor(props) {
@@ -39,7 +41,7 @@ class LoginComponent extends React.Component{
                 console.log('login info', result);
                 if(result.id){
                     console.log('Successful login');
-                    //need to redirect!!!
+                    document.getElementById('login-div').style.display = 'none';
                 } else {
                     console.error('bad credentials');
                 }
@@ -47,7 +49,7 @@ class LoginComponent extends React.Component{
     }
     render() {
         return (
-            <div className="login-page">
+            <div className="login-page" id="login-div">
                 <div className="form">
                     <form id="login" onSubmit={this.focusTextInput}>
                         <input type="text" placeholder="Enter Username" onChange={this.handleUsernameChange} required/>
