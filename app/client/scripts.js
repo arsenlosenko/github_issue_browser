@@ -102,7 +102,7 @@ fetch('https://api.github.com/repos/' + repoUrl + '/issues/' + issueNumber, {
 
         console.log('particular issues',result);
 
-    })
+    });
 
 
 //comments in issue
