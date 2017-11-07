@@ -21,8 +21,29 @@ let backButtonClickHandler = () => {
 let sendButtonClickHandler = () => {
 
     let message = document.getElementById('send-message-input').value;
-    console.log('Send message data:', message, getUsername(), requests.getIssueNum(), requests.getIssueID());
+    console.log('Send message data:', new Date(), message, getUsername(), requests.getIssueNum(), requests.getIssueID());
 
+    //append send message;
+    console.log(FindByAttributeValue('issue-id', requests.getIssueID()));
+    let currentUl = FindByAttributeValue('issue-id', requests.getIssueID());
+
+    let li = document.createElement('li');
+    let messageSend = document.createElement('p');
+    messageSend.innerHTML = message;
+    messageSend.setAttribute('class','comment-message');
+    let user = document.createElement('p');
+    user.innerHTML = getUsername();
+    user.setAttribute('class','comment-author');
+    let date = document.createElement('p');
+    date.innerHTML = new Date();
+    date.setAttribute('class','comment-date');
+    li.appendChild(messageSend);
+    li.appendChild(user);
+    li.appendChild(date);
+    li.setAttribute('class', 'issue-item');
+    currentUl.appendChild(li);
+
+    //send message to the server
     /*socket.emit('sendMessage', {
         message: message,
         issueNumber: requests.getIssueNum(),
@@ -30,10 +51,44 @@ let sendButtonClickHandler = () => {
     })*/
 }
 
-/*
-socket.on('getMessage', (data) => {
+let FindByAttributeValue = (attribute, value) => {
+    var All = document.getElementsByTagName('*');
+    for (let i = 0; i < All.length; i++)       {
+        if (All[i].getAttribute(attribute) == value) { return All[i]; }
+    }
+}
+
+/*socket.on('getMessage', (data) => {
     //get json
     console.log(data);
+     /!*
+     {
+        issueID,
+        message,
+        username,
+        date
+     }
+      *!/
+
+    //append received message
+    console.log(FindByAttributeValue('issue-id', data.issueID));
+    let currentUl = FindByAttributeValue('issue-id', data.issueID);
+
+    let li = document.createElement('li');
+    let messageSend = document.createElement('p');
+    messageSend.innerHTML = data.message;
+    messageSend.setAttribute('class','comment-message');
+    let user = document.createElement('p');
+    user.innerHTML = data.username;
+    user.setAttribute('class','comment-author');
+    let date = document.createElement('p');
+    date.innerHTML = data.date;
+    date.setAttribute('class','comment-date');
+    li.appendChild(messageSend);
+    li.appendChild(user);
+    li.appendChild(date);
+    li.setAttribute('class', 'issue-item');
+    currentUl.appendChild(li);
 })*/
 
 let logout = () => {

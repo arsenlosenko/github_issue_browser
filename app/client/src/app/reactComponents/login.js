@@ -42,7 +42,7 @@ class LoginComponent extends React.Component{
                 document.getElementById('search-repository-component').style.display = 'block';
                 if(result.id){
                     console.log('Successful login');
-                    units.setUsername(result.name); //set username for message send
+                    units.setUsername(result.login); //set username for message send
                 } else {
                     console.error('bad credentials');
                     window.location.reload();

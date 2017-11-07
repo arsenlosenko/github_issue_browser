@@ -142,6 +142,8 @@ let getIssueComments = (repoUrl, issueNumber, issueId) => {
             } else {
                 //empty issue comments
             }
+            document.getElementById('comments-list-ui').setAttribute('issue-id', issueId);
+            document.getElementById('comments-list-ui').setAttribute('issue-number', issueNumber);
         })
 }
 
