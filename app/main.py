@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from server.runsocket import socketio, app
+from server.app import socketio, app
 from flask_restful import Resource, Api
 from server.api import Issues
 
