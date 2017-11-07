@@ -17,8 +17,6 @@ class ChatComponent extends React.Component{
                 <div className='common-info-div'>
                     <label>Name</label>
                     <span id='repo-name'></span>
-                    <label>Branches</label>
-                    <span id='repo-branches'></span>
                     <label>Language</label>
                     <span id='repo-language'></span>
                     <label>Stars</label>
