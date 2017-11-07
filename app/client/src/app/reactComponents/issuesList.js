@@ -1,5 +1,6 @@
 import React from "react";
-import styles from "../../css/issuesList.css";
+import "../../css/issuesList.css";
+import units from "../utilities/main.js";
 
 class ChatComponent extends React.Component {
     constructor(props) {
@@ -7,7 +8,7 @@ class ChatComponent extends React.Component {
         this.sendMessage = this.sendMessage.bind(this);
     }
     sendMessage(){
-        sendButtonClickHandler();
+        units.sendButtonClickHandler();
     }
     render() {
         return (

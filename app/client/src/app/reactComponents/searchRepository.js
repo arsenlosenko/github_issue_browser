@@ -1,6 +1,7 @@
 import React from "react";
-import styles from "../../css/searchRepository.css";
+import "../../css/searchRepository.css";
 import ChatComponent from "./chat";
+import requests from "../utilities/requests.js";
 let repoUrl;
 
 class SearchComponent extends React.Component{
@@ -17,7 +18,7 @@ class SearchComponent extends React.Component{
     focusURLInput() {
         console.log(this.repoURL);
         repoUrl = this.repoURL;
-        getRepositoryInfo(repoUrl);
+        requests.getRepositoryInfo(repoUrl);
     }
     render() {
         return (

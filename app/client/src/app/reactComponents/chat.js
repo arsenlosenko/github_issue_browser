@@ -1,6 +1,6 @@
 import React from "react";
 import IssuesListComponent from "./issuesList";
-import styles from "../../css/chat.css";
+import "../../css/chat.css";
 
 class ChatComponent extends React.Component{
     render() {

@@ -1,4 +1,8 @@
+import units from '../utilities/main'
+
 let issueNum;
+let issueID;
+
 let getRepositoryInfo = (repoUrl) => {
 
     let array = repoUrl.split('/');
@@ -23,6 +27,7 @@ let getRepositoryInfo = (repoUrl) => {
                 document.getElementById('repo-watchers').textContent = result.watchers_count;
                 document.getElementById('repo-subscribers').textContent = result.subscribers_count;
                 getBranchesInfo(parsedRepoUrl);
+                units.getStatisticData(parsedRepoUrl, result.id);
             }
         })
 }
@@ -70,8 +75,8 @@ let getIssuesInfo = (repoUrl) => {
                     li.setAttribute("number", item.number);
                     li.setAttribute("class", "issue-item");
                     li.addEventListener("click", () => {
-                        singleIssueClickHandler(li);
-                        getIssueComments(repoUrl, item.number);
+                        units.singleIssueClickHandler(li);
+                        getIssueComments(repoUrl, item.number, item.id);
                     })
                     //
                     document.getElementById("list-ui").appendChild(li);
@@ -87,7 +92,7 @@ let getIssuesInfo = (repoUrl) => {
 }
 
 //comments in issue
-let getIssueComments = (repoUrl, issueNumber) => {
+let getIssueComments = (repoUrl, issueNumber, issueId) => {
     fetch('https://api.github.com/repos/' + repoUrl + '/issues/' + issueNumber + '/comments', {
         method: 'get'
     })
@@ -99,6 +104,7 @@ let getIssueComments = (repoUrl, issueNumber) => {
 
             //for send message handler
             issueNum = issueNumber;
+            issueID = issueId;
 
             //manage DOM
             document.getElementsByClassName('issues-list-div')[0].style.display = 'none';
@@ -108,7 +114,7 @@ let getIssueComments = (repoUrl, issueNumber) => {
             let backButton = document.createElement('button');
             backButton.setAttribute('id', 'back-button');
             backButton.addEventListener('click', () => {
-                backButtonClickHandler();
+                units.backButtonClickHandler();
             })
             backButton.innerHTML = 'Back';
             document.getElementById('comments-list-ui').appendChild(backButton);
@@ -151,3 +157,20 @@ let getIssue = (issueNumber, repoUrl) => {
             console.log('particular issues', result);
         });
 }
+
+//especially for export
+let getIssueNum = () => {
+    return issueNum;
+}
+let getIssueID = () => {
+    return issueID;
+}
+
+//export obj
+const request = {
+    getRepositoryInfo: getRepositoryInfo,
+    getIssueNum: getIssueNum,
+    getIssueID: getIssueID
+}
+
+export default request;
