@@ -42,3 +42,25 @@ export FLASK_APP=app.py
 ```bash
 flask run
 ```
+
+### Start React client
+
+0. Go to `app/client/`:
+```bash
+npm i --save
+```
+
+1. Start Webpack:
+```bash
+npm start
+```
+
+2. Go to `localhost:4000` in your browser.
+
+
+### User Manual
+
+1. Login to your GitHub account
+2. Enter repository URL and click Search
+3. Click to particular issue for view comments
+4. Enter your comment and click Send

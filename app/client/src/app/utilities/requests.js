@@ -48,7 +48,7 @@ let getBranchesInfo = (repoUrl) => {
 
 //issues
 let getIssuesInfo = (repoUrl) => {
-    fetch('https://api.github.com/repos/' + repoUrl + '/issues', {
+    fetch('https://api.github.com/repos/' + repoUrl + '/issues' + '?per_page=100', {
         method: 'get'
     })
         .then((res) => {
@@ -93,7 +93,7 @@ let getIssuesInfo = (repoUrl) => {
 
 //comments in issue
 let getIssueComments = (repoUrl, issueNumber, issueId) => {
-    fetch('https://api.github.com/repos/' + repoUrl + '/issues/' + issueNumber + '/comments', {
+    fetch('https://api.github.com/repos/' + repoUrl + '/issues/' + issueNumber + '/comments' + '?per_page=100', {
         method: 'get'
     })
         .then((res) => {
@@ -174,6 +174,7 @@ let getStatisticData = (repoUrl) => {
         })
         .then((result) => {
             console.log('statistic repository data', result);
+            //document.getElementById('repo-day-issue').innerHTML = result;
         });
 }
 

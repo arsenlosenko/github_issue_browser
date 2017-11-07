@@ -45,6 +45,12 @@ class ChatComponent extends React.Component{
               <p className="title" id='repo-stars'></p>
             </div>
           </div>
+            <div className="level-item has-text-centered">
+                <div>
+                    <p className="heading">Day/Issue</p>
+                    <p className="title" id='repo-day-issue'></p>
+                </div>
+            </div>
         </nav>
         <IssuesListComponent />
 </div>
