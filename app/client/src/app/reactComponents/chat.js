@@ -6,7 +6,7 @@ class ChatComponent extends React.Component{
     render() {
         return (
             <div>
-                <div className="common-info-div">
+                <div className='common-info-div'>
                     <label>Name</label>
                     <span id='repo-name'></span>
                     <label>Branches</label>
@@ -23,6 +23,9 @@ class ChatComponent extends React.Component{
                     <span id='repo-subscribers'></span>
                     <label>Brunches</label>
                     <span id='repo-brunches'></span>
+                </div>
+                <div className='statistic-info-div'>
+                    {/*render statistic data from python API*/}
                 </div>
                 <IssuesListComponent />
             </div>

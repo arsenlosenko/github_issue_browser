@@ -2,10 +2,18 @@
     display: none;
 }
 .issue-empty-list{
-    text-align: center;
+    text-align: center; /*if no issues in repo*/
 }
 .issues-comments-div {
     display: none;
+}
+
+.statistic-info-div{
+    /*дів із даними статитстики із АПІ пітона*/
+}
+
+.common-info-div{
+    /*дів із загальною інфою*/
 }
 
 /*--- Dialog - issues list ---*/

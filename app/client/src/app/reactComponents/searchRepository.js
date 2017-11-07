@@ -24,7 +24,7 @@ class SearchComponent extends React.Component{
         return (
             <div>
                 <div id='search-div'>
-                    <input type="text" placeholder="Enter repository URL" onChange={this.handleURLChange} required/>
+                    <input type="text" placeholder='Enter repository URL' onChange={this.handleURLChange} required/>
                     <button onClick={this.focusURLInput}>Search</button>
                 </div>
                 <div id='chat-component'>

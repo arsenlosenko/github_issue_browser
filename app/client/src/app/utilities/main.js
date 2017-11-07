@@ -1,5 +1,7 @@
 import requests from './requests';
 
+let username;
+
 //socket logic
 /*let serverUTL = ''; //need server from gays!
 let socket = io.connect(serverUTL);*/
@@ -19,7 +21,7 @@ let backButtonClickHandler = () => {
 let sendButtonClickHandler = () => {
 
     let message = document.getElementById('send-message-input').value;
-    console.log('Send message data:', message, requests.getIssueNum());
+    console.log('Send message data:', message, getUsername(), requests.getIssueNum(), requests.getIssueID());
 
     /*socket.emit('sendMessage', {
         message: message,
@@ -28,29 +30,26 @@ let sendButtonClickHandler = () => {
     })*/
 }
 
-let getStatisticData = (repoUrl, repoId) => {
-    /*socket.emit('getStatisticData', {
-        repositoryUrl: repoUrl,
-        repositoryId: repoId
-    })*/
-}
-
-/*socket.on('getStatisticData',(data) => {
-    //get json
-    console.log(data);
-})
-
+/*
 socket.on('getMessage', (data) => {
     //get json
     console.log(data);
 })*/
+
+//especially for export
+let setUsername = (value) => {
+    username = value;
+}
+let getUsername = () => {
+    return username;
+}
 
 //export obj
 const units = {
     singleIssueClickHandler:singleIssueClickHandler,
     backButtonClickHandler:backButtonClickHandler,
     sendButtonClickHandler:sendButtonClickHandler,
-    getStatisticData: getStatisticData
+    setUsername: setUsername
 }
 
 export default units;

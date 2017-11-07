@@ -1,9 +1,7 @@
 import React from "react";
+import units from "../utilities/main";
 import SearchRepositoryComponent from "./searchRepository";
-import styles from "../../css/login.css";
-import  { Redirect } from 'react-router-dom'
-import { BrowserRouter } from 'react-router-dom'
-import * as ReactDOM from "react-dom";
+import "../../css/login.css";
 
 class LoginComponent extends React.Component{
     constructor(props) {
@@ -44,6 +42,7 @@ class LoginComponent extends React.Component{
                 document.getElementById('search-repository-component').style.display = 'block';
                 if(result.id){
                     console.log('Successful login');
+                    units.setUsername(result.name); //set username for message send
                 } else {
                     console.error('bad credentials');
                     window.location.reload();

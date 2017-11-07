@@ -27,7 +27,7 @@ let getRepositoryInfo = (repoUrl) => {
                 document.getElementById('repo-watchers').textContent = result.watchers_count;
                 document.getElementById('repo-subscribers').textContent = result.subscribers_count;
                 getBranchesInfo(parsedRepoUrl);
-                units.getStatisticData(parsedRepoUrl, result.id);
+                //getStatisticData(result.id);
             }
         })
 }
@@ -145,6 +145,23 @@ let getIssueComments = (repoUrl, issueNumber, issueId) => {
         })
 }
 
+//get statistics data from python API
+let getStatisticData = (repoId) => {
+    console.log('repoID', repoId);
+
+    let urlAPI = ''  //wait gays
+    fetch(urlAPI, {
+        method: 'get'
+    })
+        .then((res) => {
+            console.log('temp statistic data', res);
+            return res.json();
+        })
+        .then((result) => {
+            console.log('statistic repository data', result);
+        });
+}
+
 //particular issue - still useless
 let getIssue = (issueNumber, repoUrl) => {
     fetch('https://api.github.com/repos/' + repoUrl + '/issues/' + issueNumber, {
@@ -170,7 +187,8 @@ let getIssueID = () => {
 const request = {
     getRepositoryInfo: getRepositoryInfo,
     getIssueNum: getIssueNum,
-    getIssueID: getIssueID
+    getIssueID: getIssueID,
+    getStatisticData: getStatisticData
 }
 
 export default request;
