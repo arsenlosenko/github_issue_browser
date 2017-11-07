@@ -42,7 +42,7 @@ class SearchComponent extends React.Component{
         <div id="navbarMenuHeroA" className="navbar-menu">
           <div className="navbar-end">
             <span className="navbar-item">
-              <a className="button is-primary is-inverted" href="https://github.com/ripiuk">
+              <a className="button is-primary is-inverted" href="https://github.com/arsenlosenko/github_issue_browser/">
                 <span className="icon">
                   <i className="fa fa-github"></i>
                 </span>
