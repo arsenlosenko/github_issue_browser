@@ -1,3 +1,37 @@
 #chat-component {
     display: none;
 }
+.issue-empty-list{
+    text-align: center;
+}
+.issues-comments-div {
+    display: none;
+}
+
+/*--- Dialog - issues list ---*/
+.issue-status {
+    /*статус issue*/
+}
+.issue-title {
+    /*назва issue*/
+}
+
+/*--- Dialog - issue comments list ---*/
+#back-button {
+    /*кнопка BACK*/
+}
+.comment-message{
+    /*повідомлення (коменти) в issue*/
+}
+.comment-author {
+    /*автор повідомлення в issue*/
+}
+.comment-date {
+    /*дата повідомлення в issue*/
+}
+#send-message-button {
+    /*кнопка відіслати повідомлення*/
+}
+#send-message-input {
+    /*інпут для повідомлення*/
+}

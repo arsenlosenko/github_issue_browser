@@ -1,12 +1,13 @@
+let issueNum;
 let getRepositoryInfo = (repoUrl) => {
 
     let array = repoUrl.split('/');
-    let parsedRepoUrl = array[3] + '/'+array[4];
+    let parsedRepoUrl = array[3] + '/' + array[4];
 
     fetch('https://api.github.com/repos/' + parsedRepoUrl, {
         method: 'get'
     })
-        .then((res)=>{
+        .then((res) => {
             return res.json();
         })
         .then((result) => {
@@ -15,12 +16,12 @@ let getRepositoryInfo = (repoUrl) => {
             if (result.id) {
                 document.getElementById('chat-component').style.display = 'block';
                 document.getElementById('search-div').style.display = 'none';
-                document.getElementById('repo-name').textContent=result.name;
-                document.getElementById('repo-language').textContent=result.language;
-                document.getElementById('repo-stars').textContent=result.stargazers_count;
-                document.getElementById('repo-owner').textContent=result.owner.login;
-                document.getElementById('repo-watchers').textContent=result.watchers_count;
-                document.getElementById('repo-subscribers').textContent=result.subscribers_count;
+                document.getElementById('repo-name').textContent = result.name;
+                document.getElementById('repo-language').textContent = result.language;
+                document.getElementById('repo-stars').textContent = result.stargazers_count;
+                document.getElementById('repo-owner').textContent = result.owner.login;
+                document.getElementById('repo-watchers').textContent = result.watchers_count;
+                document.getElementById('repo-subscribers').textContent = result.subscribers_count;
                 getBranchesInfo(parsedRepoUrl);
             }
         })
@@ -30,12 +31,12 @@ let getBranchesInfo = (repoUrl) => {
     fetch('https://api.github.com/repos/' + repoUrl + '/branches', {
         method: 'get'
     })
-        .then((res)=>{
+        .then((res) => {
             return res.json();
         })
         .then((result) => {
-            console.log('branches',result);
-            document.getElementById('repo-brunches').textContent=result.length;
+            console.log('branches', result);
+            document.getElementById('repo-brunches').textContent = result.length;
             getIssuesInfo(repoUrl);
         })
 }
@@ -51,26 +52,95 @@ let getIssuesInfo = (repoUrl) => {
         .then((result) => {
             console.log('issues', result);
 
-            result.map((item,index)=>{
-                let li = document.createElement("LI");
-                let content = document.createTextNode(item.title + ' - ' + item.state);
-                li.appendChild(content);
+            if (result.length !== 0) {
+                //create list of issues
+                result.map((item, index) => {
+                    let li = document.createElement("li");
+                    let status = document.createElement("p");
+                    status.innerHTML = item.state;
+                    status.setAttribute('class','issue-status');
+                    let title = document.createElement("p");
+                    title.innerHTML = item.title;
+                    title.setAttribute('class','issue-title');
+                    li.appendChild(status);
+                    li.appendChild(title);
 
-                //now can create single dialog for each issue
-                li.setAttribute("id", item.id);
-                li.setAttribute("number", item.number);
-                li.addEventListener("click", function(){
-                    console.log(this.getAttribute("id"));
-                    console.log(this.getAttribute("number"));
-                });
-                //
-                document.getElementById("list-ui").appendChild(li);
-            })
+                    //now can create single dialog for each issue
+                    li.setAttribute("id", item.id);
+                    li.setAttribute("number", item.number);
+                    li.setAttribute("class", "issue-item");
+                    li.addEventListener("click", () => {
+                        singleIssueClickHandler(li);
+                        getIssueComments(repoUrl, item.number);
+                    })
+                    //
+                    document.getElementById("list-ui").appendChild(li);
+                })
+            } else {
+                let workArea = document.getElementsByClassName("issues-list-div")[0];
+                let span = document.createElement("div");
+                span.setAttribute("class", "issue-empty-list");
+                span.innerHTML = 'This repository have no issues';
+                workArea.appendChild(span);
+            }
         })
 }
 
-//particular issue
-let getIssue = () => {
+//comments in issue
+let getIssueComments = (repoUrl, issueNumber) => {
+    fetch('https://api.github.com/repos/' + repoUrl + '/issues/' + issueNumber + '/comments', {
+        method: 'get'
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .then((result) => {
+            console.log('issues comments', result);
+
+            //for send message handler
+            issueNum = issueNumber;
+
+            //manage DOM
+            document.getElementsByClassName('issues-list-div')[0].style.display = 'none';
+            document.getElementsByClassName('issues-comments-div')[0].style.display = 'block';
+
+            //create back button
+            let backButton = document.createElement('button');
+            backButton.setAttribute('id', 'back-button');
+            backButton.addEventListener('click', () => {
+                backButtonClickHandler();
+            })
+            backButton.innerHTML = 'Back';
+            document.getElementById('comments-list-ui').appendChild(backButton);
+
+            if(result.length !== 0) {
+                //create list of comments
+                result.map((item, index) => {
+                    let li = document.createElement('li');
+                    let message = document.createElement('p');
+                    message.innerHTML = item.body;
+                    message.setAttribute('class','comment-message');
+                    let user = document.createElement('p');
+                    user.innerHTML = item.user.login;
+                    user.setAttribute('class','comment-author');
+                    let date = document.createElement('p');
+                    date.innerHTML = item.updated_at;
+                    date.setAttribute('class','comment-date');
+                    li.appendChild(message);
+                    li.appendChild(user);
+                    li.appendChild(date);
+                    li.setAttribute('class', 'issue-item');
+                    document.getElementById('comments-list-ui').appendChild(li);
+                })
+
+            } else {
+                //empty issue comments
+            }
+        })
+}
+
+//particular issue - still useless
+let getIssue = (issueNumber, repoUrl) => {
     fetch('https://api.github.com/repos/' + repoUrl + '/issues/' + issueNumber, {
         method: 'get'
     })
@@ -80,17 +150,4 @@ let getIssue = () => {
         .then((result) => {
             console.log('particular issues', result);
         });
-}
-
-//comments in issue
-let getIssueComments = () => {
-    fetch('https://api.github.com/repos/' + repoUrl + '/issues/' + issueNumber + '/comments', {
-        method: 'get'
-    })
-        .then((res) => {
-            return res.json();
-        })
-        .then((result) => {
-            console.log('issues comments', result);
-        })
 }
