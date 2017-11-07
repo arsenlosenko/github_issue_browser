@@ -21,7 +21,7 @@ let backButtonClickHandler = () => {
 let sendButtonClickHandler = () => {
 
     let message = document.getElementById('send-message-input').value;
-    console.log('Send message data:', new Date(), message, getUsername(), requests.getIssueNum(), requests.getIssueID());
+    console.log('Send message data:', formatDate(new Date()), message, getUsername(), requests.getIssueNum(), requests.getIssueID());
 
     //append send message;
     console.log(FindByAttributeValue('issue-id', requests.getIssueID()));
@@ -35,7 +35,7 @@ let sendButtonClickHandler = () => {
     user.innerHTML = getUsername();
     user.setAttribute('class','comment-author');
     let date = document.createElement('p');
-    date.innerHTML = new Date();
+    date.innerHTML = formatDate(new Date());
     date.setAttribute('class','comment-date');
     li.appendChild(messageSend);
     li.appendChild(user);
@@ -49,13 +49,6 @@ let sendButtonClickHandler = () => {
         issueNumber: requests.getIssueNum(),
         issueId: requests.getIssueID()
     })*/
-}
-
-let FindByAttributeValue = (attribute, value) => {
-    var All = document.getElementsByTagName('*');
-    for (let i = 0; i < All.length; i++)       {
-        if (All[i].getAttribute(attribute) == value) { return All[i]; }
-    }
 }
 
 /*socket.on('getMessage', (data) => {
@@ -90,6 +83,32 @@ let FindByAttributeValue = (attribute, value) => {
     li.setAttribute('class', 'issue-item');
     currentUl.appendChild(li);
 })*/
+
+let FindByAttributeValue = (attribute, value) => {
+    var All = document.getElementsByTagName('*');
+    for (let i = 0; i < All.length; i++)       {
+        if (All[i].getAttribute(attribute) == value) { return All[i]; }
+    }
+}
+//justify date output
+let formatDate = (val) => {
+    let date = new Date(val);
+    let array = [
+        date.getFullYear(),
+        date.getMonth() + 1,
+        date.getDate(),
+        date.getHours(),
+        date.getMinutes(),
+        date.getSeconds()
+    ];
+
+    let res = array.map(item => {
+        if (item < 10) item = "0" + item;
+        return item;
+    });
+
+    return res[0] + '.' + res[1] + '.' + res[2] + ' ' + res[3] + ':' + res[4] + ':' + res[5];
+}
 
 let logout = () => {
     window.location.reload();

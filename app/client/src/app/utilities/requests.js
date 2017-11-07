@@ -130,7 +130,15 @@ let getIssueComments = (repoUrl, issueNumber, issueId) => {
                     user.innerHTML = item.user.login;
                     user.setAttribute('class','comment-author');
                     let date = document.createElement('p');
-                    date.innerHTML = item.updated_at;
+
+                    //justify timeDate output
+                    let array1 = item.updated_at.split('T');
+                    let array2 = array1[0].split('-');
+                    let tempDate = array2[0] + '.' + array2[1] + '.' + array2[2];
+                    let tempTime = array1[1].slice(0, -1);
+                    let finalTimeDate = tempDate + ' ' + tempTime;
+
+                    date.innerHTML = finalTimeDate;
                     date.setAttribute('class','comment-date');
                     li.appendChild(message);
                     li.appendChild(user);
