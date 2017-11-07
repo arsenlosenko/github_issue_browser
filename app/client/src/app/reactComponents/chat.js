@@ -1,8 +1,16 @@
 import React from "react";
 import IssuesListComponent from "./issuesList";
+import units from "../utilities/main";
 import "../../css/chat.css";
 
 class ChatComponent extends React.Component{
+    constructor(props) {
+        super(props);
+        this.logout = this.logout.bind(this);
+    }
+    logout(){
+        units.logout();
+    }
     render() {
         return (
             <div>
@@ -23,6 +31,7 @@ class ChatComponent extends React.Component{
                     <span id='repo-subscribers'></span>
                     <label>Brunches</label>
                     <span id='repo-brunches'></span>
+                    <button id='logout-button' onClick={this.logout}>log Out</button>
                 </div>
                 <div className='statistic-info-div'>
                     {/*render statistic data from python API*/}

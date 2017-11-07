@@ -36,6 +36,10 @@ socket.on('getMessage', (data) => {
     console.log(data);
 })*/
 
+let logout = () => {
+    window.location.reload();
+}
+
 //especially for export
 let setUsername = (value) => {
     username = value;
@@ -49,7 +53,8 @@ const units = {
     singleIssueClickHandler:singleIssueClickHandler,
     backButtonClickHandler:backButtonClickHandler,
     sendButtonClickHandler:sendButtonClickHandler,
-    setUsername: setUsername
+    setUsername: setUsername,
+    logout:logout
 }
 
 export default units;
