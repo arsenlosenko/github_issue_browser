@@ -64,3 +64,6 @@ npm start
 2. Enter repository URL and click Search
 3. Click to particular issue for view comments
 4. Enter your comment and click Send
+
+### Hosting
+Project is available on http://104.197.117.21:8000/

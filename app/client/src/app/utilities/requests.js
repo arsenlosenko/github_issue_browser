@@ -161,7 +161,7 @@ let getIssueComments = (repoUrl, issueNumber, issueId) => {
 let getStatisticData = (repoUrl) => {
     console.log('repoID', repoUrl);
 
-    let urlAPI = '/api/v1/issues'
+    let urlAPI = 'http://104.197.117.21:4000/api/v1/issues'
     fetch(urlAPI, {
         method: 'post',
         body: {
@@ -203,8 +203,7 @@ let getIssueID = () => {
 const request = {
     getRepositoryInfo: getRepositoryInfo,
     getIssueNum: getIssueNum,
-    getIssueID: getIssueID,
-    getStatisticData: getStatisticData
+    getIssueID: getIssueID
 }
 
 export default request;
