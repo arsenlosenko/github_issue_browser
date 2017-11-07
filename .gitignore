@@ -2,3 +2,5 @@
 node_modules/
 app/venv/
 app/**/*.pyc
+venv/
+*dist/

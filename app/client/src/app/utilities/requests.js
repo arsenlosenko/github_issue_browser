@@ -20,12 +20,12 @@ let getRepositoryInfo = (repoUrl) => {
             if (result.id) {
                 document.getElementById('chat-component').style.display = 'block';
                 document.getElementById('search-div').style.display = 'none';
-                document.getElementById('repo-name').textContent = result.name;
-                document.getElementById('repo-language').textContent = result.language;
-                document.getElementById('repo-stars').textContent = result.stargazers_count;
-                document.getElementById('repo-owner').textContent = result.owner.login;
-                document.getElementById('repo-watchers').textContent = result.watchers_count;
-                document.getElementById('repo-subscribers').textContent = result.subscribers_count;
+                document.getElementById('repo-name').innerHTML = result.name;
+//                document.getElementById('repo-language').innerHTML = result.language;
+                document.getElementById('repo-stars').innerHTML = result.stargazers_count;
+//                document.getElementById('repo-owner').innerHTML = result.owner.login;
+                document.getElementById('repo-watchers').innerHTML = result.watchers_count;
+                document.getElementById('repo-subscribers').innerHTML = result.subscribers_count;
                 getBranchesInfo(parsedRepoUrl);
                 //getStatisticData(result.id);
             }
@@ -41,7 +41,7 @@ let getBranchesInfo = (repoUrl) => {
         })
         .then((result) => {
             console.log('branches', result);
-            document.getElementById('repo-brunches').textContent = result.length;
+            document.getElementById('repo-brunches').innerHTML = result.length;
             getIssuesInfo(repoUrl);
         })
 }
@@ -60,7 +60,7 @@ let getIssuesInfo = (repoUrl) => {
             if (result.length !== 0) {
                 //create list of issues
                 result.map((item, index) => {
-                    let li = document.createElement("li");
+                    let li = document.createElement("div");
                     let status = document.createElement("p");
                     status.innerHTML = item.state;
                     status.setAttribute('class','issue-status');
@@ -73,7 +73,7 @@ let getIssuesInfo = (repoUrl) => {
                     //now can create single dialog for each issue
                     li.setAttribute("id", item.id);
                     li.setAttribute("number", item.number);
-                    li.setAttribute("class", "issue-item");
+                    li.setAttribute("class", "issue-item box");
                     li.addEventListener("click", () => {
                         units.singleIssueClickHandler(li);
                         getIssueComments(repoUrl, item.number, item.id);
@@ -113,6 +113,7 @@ let getIssueComments = (repoUrl, issueNumber, issueId) => {
             //create back button
             let backButton = document.createElement('button');
             backButton.setAttribute('id', 'back-button');
+            backButton.setAttribute('class', 'button');
             backButton.addEventListener('click', () => {
                 units.backButtonClickHandler();
             })
@@ -122,7 +123,8 @@ let getIssueComments = (repoUrl, issueNumber, issueId) => {
             if(result.length !== 0) {
                 //create list of comments
                 result.map((item, index) => {
-                    let li = document.createElement('li');
+                    let li = document.createElement('div');
+                    li.setAttribute('class','comment-block box');
                     let message = document.createElement('p');
                     message.innerHTML = item.body;
                     message.setAttribute('class','comment-message');
@@ -143,7 +145,7 @@ let getIssueComments = (repoUrl, issueNumber, issueId) => {
                     li.appendChild(message);
                     li.appendChild(user);
                     li.appendChild(date);
-                    li.setAttribute('class', 'issue-item');
+                    li.setAttribute('class', 'issue-item box');
                     document.getElementById('comments-list-ui').appendChild(li);
                 })
 
