@@ -27,7 +27,7 @@ let sendButtonClickHandler = () => {
     console.log(FindByAttributeValue('issue-id', requests.getIssueID()));
     let currentUl = FindByAttributeValue('issue-id', requests.getIssueID());
 
-    let li = document.createElement('li');
+    let li = document.createElement('div');
     let messageSend = document.createElement('p');
     messageSend.innerHTML = message;
     messageSend.setAttribute('class','comment-message');
@@ -40,7 +40,7 @@ let sendButtonClickHandler = () => {
     li.appendChild(messageSend);
     li.appendChild(user);
     li.appendChild(date);
-    li.setAttribute('class', 'issue-item');
+    li.setAttribute('class', 'issue-item box');
     currentUl.appendChild(li);
 
     //send message to the server
@@ -67,7 +67,7 @@ let sendButtonClickHandler = () => {
     console.log(FindByAttributeValue('issue-id', data.issueID));
     let currentUl = FindByAttributeValue('issue-id', data.issueID);
 
-    let li = document.createElement('li');
+    let li = document.createElement('div');
     let messageSend = document.createElement('p');
     messageSend.innerHTML = data.message;
     messageSend.setAttribute('class','comment-message');
@@ -80,7 +80,7 @@ let sendButtonClickHandler = () => {
     li.appendChild(messageSend);
     li.appendChild(user);
     li.appendChild(date);
-    li.setAttribute('class', 'issue-item');
+    li.setAttribute('class', 'issue-item box');
     currentUl.appendChild(li);
 })*/
 

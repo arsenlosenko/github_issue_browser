@@ -22,9 +22,15 @@ class ChatComponent extends React.Component {
                     <ul id="comments-list-ui">
                         {/*there will be appended content from requests.js*/}
                     </ul>
-                    <div className="send-message-div">
-                        <input id="send-message-input" type="text" placeholder="Enter comment message"/>
-                        <button onClick={this.sendMessage} id="send-message-button">Send</button>
+                    <div className="section">
+                        <div className="send-message-div field has-addons">
+                            <p className="control">
+                                <input id="send-message-input" className="input is-primary" type="text" placeholder="Enter comment message"/>
+                            </p>
+                            <p className="control">
+                                <button className="button is-primary is-outlined" onClick={this.sendMessage} id="send-message-button">Send</button>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
